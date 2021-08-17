@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel = "stylesheet" href="style.css">
+    <title>Vue Fundamentals</title>
+</head>
+<body>
+    
+
+<div id = "app" >
+
+    <div id = "Shopping-List" >
+    <h1> {{header}}</h1>
+    </div>
+    <div id = "list">
+        <input 
+        @keyup.enter="saveItem" 
+        type="text" v-model="newItem" placeholder = "Add an Item">
+        <button @click = "Add">Add</button>
+
+        <p v-if = "items.length === 0"> Nice Job! You Bought All Items</p>
+  <ul>
+     
+    <li  v-for = "item in items" :key = "item.id">  <input type = "checkbox"> {{item.label}}</li>
+    </ul>
+
+  </div>
+
+</div>
+
+
+
+
+<!--import vue-->
+    <script src="https://unpkg.com/vue@next"></script>
+
+
+<script>
+Vue.createApp({
+
+data(){
+return{
+    header  : 'SHOPPING LIST',
+    items : [],
+    newItem : ''
+}
+},
+methods : {
+   Add(){
+    this.items.push({
+            id:this.items.length + 1, 
+            label: this.newItem, 
+   })
+   this.newItem = ""
+         
+}
+},
+
+
+})
+.mount('#app')
+
+
+
+</script>
+</body>
+</html>
